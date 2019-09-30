@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web Apps</title>
+        <meta charset="utf-8">
+
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+            @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+            @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+            body {
+                font-family: 'Droid Serif';
+                line-height: 2em;
+            }
+
+            h1, h2, h3 {
+                font-family: 'Yanone Kaffeesatz';
+                font-weight: normal;
+                line-height: 1em;
+            }
+
+            .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+            h1::after {
+                content: '';
+                border: 0px solid #000;
+                border-top-width: 4px;
+                width: 10%;
+                height: 0px;
+                margin-top: 15px;
+                display: block;
+            }
+
+            blockquote {
+                /*background: #eee;*/
+                padding: 5px 0;
+                line-height: 1.7em;
+                color: #777;
+                font-style: italic;
+            }
+
+            blockquote em {
+                border-bottom: 2px solid #000;
+                color: #000;
+            }
+
+            .title-page h1::after {
+                border: 0;
+            }
+
+            a {
+                color: #0093FF;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <textarea id="source">
+class: center, middle, title-page
+
+# Web Apps - Introduction
+
+### Gary Renes
+
+---
+
+# What we'll cover
+
+1. What's a web app? How do they work?
+2. Source control (using Git and Github)
+3. Users, Sessions, Cookies, Requests, Responses etc.
+4. Databases
+5. Security
+6. Wireframes, Specifications
+7. File uploads
+8. App deployment
+
+---
+
+# What's a web app?
+
+From Wikipeida:
+
+> In computing, a web application or web app is a client–server computer program which the client (including the user interface and client-side logic) runs in a web browser. Common web applications include webmail, online retail sales, and online auction.
+
+---
+
+# What's the difference between a web app and a website?
+
+?
+
+---
+
+# What's the difference between a web app and a website?
+
+From Wikipeida:
+
+> _The general distinction between a dynamic web page of any kind and a "web application" is unclear_. Web sites most likely to be referred to as "web applications" are those _which have similar functionality to a desktop software application_, or to a mobile app.
+
+---
+
+# So, what's a web app again?
+
+We'll use the following definition from here on in:
+
+> A web app is an application built using _web technologies_ that runs in a web browser. It allows _users_ access to application-specific _functionality_ which allows them to perform operations on information stored in a _database_.
+
+__Example web apps__:
+
+Facebook, Twitter, Snapchat, Instagram, Google Docs
+
+__Example websites__:
+
+BBC News, Google.com
+
+---
+
+# Web technologies
+
+### Client Side
+
+* HTML & Javascript
+
+### Server Side
+
+* PHP & MySQL
+
+> There are *lots* of server-side (back-end) languages and databases that we could use, but we'll stick to PHP and MySQL for the duration of the module. There are *some* options on the client-side (front-end), but they will always be transpiled in to HTML and Javascript so they can run in the browser.
+
+---
+
+# Web app users
+
+* User accounts are required to log in and access (some / all) of the web app functionality
+* User accounts allow multiple users to use the same app (i.e. access and run the same code)
+* A particular users data is associated with their user account
+
+---
+
+# Web app functionality
+
+Some examples:
+
+* Editing documents
+* Managing photos
+* Creating posts, comments
+* Uploading files (photos, images, audio, PDFs)
+
+---
+
+# Web app databases
+
+* Store the content created by users
+* Are 'relational' - i.e an item of data can be related to another (e.g. a 'Post' to the 'User' who created it)
+* Allow us to perform queries against the data (e.g. 'Return all the posts by user x created in the last 7 days')
+
+---
+
+# How do web apps work?
+
+* The front-end (client-side) part is downloaded and runs in the users browser
+* A user registers or logs in to the app
+* The app UI allows the user to manipulate data in the browser
+* The data is submitted via forms (POST requests) or via an API (using Javascript / AJAX request) to the back-end (server-side) part of the app
+* The data is then persisted, and the app UI is updated to display the new data
+
+---
+
+# Any questions?
+
+---
+
+# Tools / Setup
+
+* GitHub - https://github.com
+* Git - https://git-scm.com
+* MAMP (macOS) - https://www.mamp.info/en/
+* WAMP (Windows) - http://www.wampserver.com/en/
+
+
+        </textarea>
+
+        <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+        </script>
+        <script>
+            var slideshow = remark.create();
+        </script>
+    </body>
+</html>
