@@ -2,27 +2,27 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Log In</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
 <body>
-	<div class="container">
-		<h3>Log In</h3>
+    <div class="container">
+        <h3>Log In</h3>
 
-		<form action="/" method="POST">
-			<div class="form-group">
-				<label for="Username">Username</label>
-				<input name="username" class="form-control" type="text">
-			</div>
-			<div class="form-group">
-				<label for="Password">Password</label>
-				<input name="password" class="form-control" type="password">
-			</div>
-			<input class="btn btn-primary" type="submit" value="Log in">
-		</form>
-	</div>
+        <form action="/" method="POST">
+            <div class="form-group">
+                <label for="Username">Username</label>
+                <input name="username" class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input name="password" class="form-control" type="password">
+            </div>
+            <input class="btn btn-primary" type="submit" value="Log in">
+        </form>
+    </div>
 </body>
 
 </html>
