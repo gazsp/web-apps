@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web Apps</title>
+        <meta charset="utf-8">
+
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+            @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+            @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+            body {
+                font-family: 'Droid Serif';
+                line-height: 2em;
+            }
+
+            h1, h2, h3 {
+                font-family: 'Yanone Kaffeesatz';
+                font-weight: normal;
+                line-height: 1em;
+            }
+
+            h2 {
+                margin: 0.5em 0;
+            }
+
+            .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+            h1::after {
+                content: '';
+                border: 0px solid #000;
+                border-top-width: 4px;
+                width: 10%;
+                height: 0px;
+                margin-top: 15px;
+                display: block;
+            }
+
+            blockquote {
+                padding: 5px 0;
+                line-height: 1.7em;
+                color: #777;
+                font-style: italic;
+            }
+
+            blockquote em {
+                border-bottom: 2px solid #000;
+                color: #000;
+            }
+
+            .title-page h1::after {
+                border: 0;
+            }
+
+            a {
+                color: #0093FF;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <textarea id="source">
+class: center, middle, title-page
+
+# Web Apps - Web Theory
+
+### Web Apps - CCO6005-20
+
+---
+
+# What theory are we talking about?
+
+1. HTTP
+2. Requests
+3. HTTP Methods (GET / POST / PATCH / DELETE)
+4. Responses
+5. HTTP Status Codes
+6. Cookies / Sessions
+7. AJAX Requests
+
+---
+
+# HTTP/1.0
+
+HTTP/1.0 (or Hypertext Transfer Protocol v1.0) is an application protocol defined in RFC1945 (https://tools.ietf.org/html/rfc1945)
+
+> The Hypertext Transfer Protocol (HTTP) is an application-level
+protocol with the lightness and speed necessary for distributed,
+collaborative, hypermedia information systems. It is a generic,
+stateless, object-oriented protocol which can be used for many tasks [...]
+
+* It is the protocol used by all web browsers and web servers (although HTTP2 / SPDY / QUIC now exist and are in use)
+* It defines how clients (web browsers) and servers can 'talk' to each other
+* It also defines the HTTP methods used for all requests (i.e. GET / POST etc)
+
+---
+
+# Requests
+
+In the world of web browsers (and therefore HTTP), a request consists of:
+
+* A request method (usually GET or POST)
+* Some headers...
+* ...and an optional request body (the data you're sending)
+
+we'll also need:
+
+* A URL or IP address of the server we wish to send the request
+
+Example:
+
+```http
+GET https://www.google.com/
+
+Accept: text/html
+Cookie: SID=oQfEb4vGjMxQVS [...]
+```
+
+---
+
+# HTTP Methods
+
+* Can be detected in PHP with $_SERVER['REQUEST_METHOD']
+
+__GET__
+
+Tells the server we want it to return some content for the given URL. It should also *not* change the representation of the resource at the given URL.
+
+__POST__
+
+We want to POST (or create) some data to (on) the server.
+
+__PATCH__
+
+We want to update some data on the server.
+
+__DELETE__
+
+Any guesses?
+
+---
+
+# HTTP Methods (Continued)
+
+PATCH and DELETE are not usually available to use directly in browsers. A common way of supplying them is as follows:
+
+```html
+<form action="/some-resource/" method="POST">
+    <!-- ... -->
+    <input type="hidden" name="_method" value="DELETE">
+</form>
+```
+
+---
+
+# Responses
+
+A HTTP Response is how the browser answers our Requests. A Response will always have the following properties:
+
+* A HTTP status code
+* Some headers
+* A body
+
+The body will usually contain some HTML, but it could also contain JSON, XML, text or an image (or other type of file content). The type of content returned is specified by the 'Content-Type' header.
+
+---
+
+# HTTP Status Codes
+
+* 1xx - Informational
+* 2xx - Success
+* 3xx - Redirection
+* 4xx - Client Error
+* 5xx - Server Error
+
+See https://www.restapitutorial.com/httpstatuscodes.html or https://http.cat/
+
+---
+
+# Cookies and Sessions
+
+__Cookies__
+
+* Cookies are simply pieces of information stored in the web browser. They can be set by on the client side (by Javascript) or on the server side (via PHP or another server-side language)
+* Passed to / from the server via the 'Cookie' header
+* Can only store a small amount of information (around 4Kb)
+
+__Sessions__
+
+* Sessions are completely server-side constructs
+* The use a session id stored in a cookie to link to session information stored on the server
+* Used to keep track of application state for a session (e.g. is the user logged in)
+* Can be 'native' (built-in / file) sessions or backed by a database / other store
+
+---
+
+# AJAX Requests 
+
+* AJAX (asynchronous JavaScript and XML) Requests are used to load and save data from / to a server in the background
+* Initiated from Javascript
+* Browser stays on the same page
+
+---
+
+# AJAX Requests (Continued)
+
+```javascript
+var name = 'John Smith',
+    xhr = new XMLHttpRequest();
+
+xhr.open('POST', '/some-resource/');
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        alert('Success! Response was: ' + xhr.responseText);
+    }
+    else {
+        alert('Request failed.  Returned status of ' + xhr.status);
+    }
+};
+xhr.send(JSON.stringify({
+    data: name
+});
+```
+
+---
+
+# Additional Resources
+
+* HTTP/1.0 - https://tools.ietf.org/html/rfc1945
+* HTTP Status Cats - https://http.cat/
+
+---
+
+        </textarea>
+
+        <script src="remark-latest.min.js"></script>
+        <script>
+            var slideshow = remark.create();
+        </script>
+    </body>
+</html>
