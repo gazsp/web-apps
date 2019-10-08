@@ -1,11 +1,9 @@
 <?php
 
-function db()
-{
+function db() {
     static $pdo;
 
     if ($pdo) {
-        echo 'Using static variable';
         return $pdo;
     }
 
@@ -18,8 +16,6 @@ function db()
 
     $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
 
-    echo 'Setting static variable';
-
     $pdo = new PDO($dsn, $username, $password, [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -28,14 +24,12 @@ function db()
     return $pdo;
 }
 
-// Get all rows from the 'users' table
-$result = db()->query("SELECT * FROM users");
-foreach ($result as $k => $v) {
-    var_dump($v);
+function show_all_users() {
+    $result = db()->query("SELECT * FROM users");
+
+    foreach ($result as $k => $v) {
+        var_dump($v);
+    }
 }
 
-// Get all rows from the 'users' table
-$result = db()->query("SELECT * FROM users");
-foreach ($result as $k => $v) {
-    var_dump($v);
-}
+show_all_users();
