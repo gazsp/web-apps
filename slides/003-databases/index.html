@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web Apps</title>
+        <meta charset="utf-8">
+
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+            @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+            @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+            body {
+                font-family: 'Droid Serif';
+                line-height: 2em;
+            }
+
+            h1, h2, h3 {
+                font-family: 'Yanone Kaffeesatz';
+                font-weight: normal;
+                line-height: 1em;
+            }
+
+            h2 {
+                margin: 0.5em 0;
+            }
+
+            .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+            h1::after {
+                content: '';
+                border: 0px solid #000;
+                border-top-width: 4px;
+                width: 10%;
+                height: 0px;
+                margin-top: 15px;
+                display: block;
+            }
+
+            blockquote {
+                padding: 5px 0;
+                line-height: 1.7em;
+                color: #777;
+                font-style: italic;
+            }
+
+            blockquote em {
+                border-bottom: 2px solid #000;
+                color: #000;
+            }
+
+            .title-page h1::after {
+                border: 0;
+            }
+
+            a {
+                color: #0093FF;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <textarea id="source">
+class: center, middle, title-page
+
+# Web Apps - Databases
+
+### Web Apps - CCO6005-20
+
+https://github.com/gazsp/web-apps
+
+---
+
+# Databases - MySQL
+
+1. Introduction
+2. Basic Queries
+3. Relationships
+
+---
+
+# Introduction
+
+A database (in MySQL) is comprised of a number of tables. Each of these __tables__ has __columns___, and each of these columns has a ___type__.
+
+A type can have an optional length and other modifiers.
+
+---
+
+# Basic Queries
+
+## CREATE table
+
+Used to create a table and its associated columns.
+
+```mysql
+CREATE TABLE `users` (
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `username` varchar(256) DEFAULT NULL,
+    `password` varchar(256) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
+
+---
+
+# SELECT
+
+Used to retrieve data from a table.
+
+```mysql
+SELECT * FROM TABLE WHERE <condition>;
+```
+
+Examples:
+
+```mysql
+-- Find user by username and password
+SELECT * FROM users WHERE username = "user@example.com" AND password = "password";
+
+-- Find all users that don't match a given username
+SELECT * FROM users WHERE username != "user@example.com";
+```
+
+---
+
+# INSERT
+
+Used to create data in a table
+
+```mysql
+INSERT INTO `users`
+    (`username`, `password`)
+VALUES
+    ('admin@example.com', 'password'),
+    ('user@example.com', 'password');
+```
+
+---
+
+# UPDATE
+
+Used to update an existing row in a table
+
+```mysql
+-- Change the username for user with an id of 1
+UPDATE users SET username = "test@example.com" WHERE id=1;
+```
+
+---
+
+# DELETE
+
+Used to delete a row from a table
+
+```mysql
+-- Delete the user with an id of 2
+DELETE FROM users WHERE id=2;
+```
+
+---
+
+# Relationships
+
+MySQL is a relational database, which means that database tables can be related to each other. The relationship types we'll cover are:
+
+* One-to-one
+* One-to-many
+* Many-to-many
+
+---
+
+# One-to-one
+
+A row in a table has one (and only one) related row in another table. If a row is only allowed to have one related row in another table, then this is called a "one-to-one" relationship.
+
+> "A user has one user profile"
+
+```
+user.user_profile_id -> user_profiles.id
+```
+
+---
+
+# One-to-one (continued)
+
+```mysql
+CREATE TABLE `users` (
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `username` varchar(256) DEFAULT NULL,
+    `password` varchar(256) DEFAULT NULL,
+    `user_profile_id` int(11) unsigned NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
+
+```mysql
+CREATE TABLE `user_profiles` (
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `first_name` varchar(256) DEFAULT NULL,
+    `last_name` varchar(256) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
+
+---
+
+# One-to-many
+
+A row in a table has multiple related rows in another table. If a row has multiple related rows in another table, then this is called a "one-to-many" relationship.
+
+> "A user can have multiple posts"
+
+```
+user.id <- posts.user_id
+```
+
+---
+
+# One-to-many (Continued)
+
+```mysql
+CREATE TABLE `posts` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(256) DEFAULT NULL,
+  `content` text DEFAULT NULL,
+  `user_id` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
+
+---
+
+# Many-to-many
+
+A many-to-many relationship needs a 'mapping' table to represent the multiple relationships between one table and another. Any example might be image 'tags', where multiple tags can belong to multiple images.
+
+> "An image has multiple tags, and tags can belong to multiple images"
+
+```
+images.id -> image_tags.image_id
+tags.id ->   image_tags.tag_id
+```
+
+---
+
+# Many-to-many (Continued)
+
+```mysql
+CREATE TABLE `tags` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `images` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `upload_path` varchar(1024) DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `images_tags` (
+  `tag_id` int(11) unsigned DEFAULT NULL,
+  `image_id` int(11) unsigned DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
+
+---
+
+# Retrieving Related Rows
+
+We retrieve rows from multiple tables by using a __JOIN__. This joins tables together based __ON__ a supplied condition.
+
+The query below returns the user and their profile from the database (if one exists):
+
+```mysql
+SELECT *
+    FROM users
+    JOIN user_profiles ON user_profiles.id = users.user_profile_id
+    WHERE users.id = 1;
+```
+
+---
+
+# Retrieving Releated Rows (continued)
+
+A modified version of the query will also work to retrieve a users posts:
+
+```mysql
+SELECT *
+    FROM users
+    JOIN posts ON posts.user_id = users.id
+    WHERE users.id = 1;
+```
+
+---
+
+# Retrieving Releated Rows (continued)
+
+The following query will return the tag ids and the tag names that are related to the image that has an id of 1:
+
+```mysql
+SELECT tags.id, tags.name
+    FROM images
+    JOIN images_tags ON images_tags.image_id = images.id
+    JOIN tags ON        images_tags.tag_id = tags.id
+    WHERE images.id = 1;
+```
+
+---
+
+# Additional Resources
+
+There's lots more we haven't covered like __FOREIGN KEYS__ and __INDEXES__ and __CONSTRAINTS__. Feel free to read up about these if you have time.
+
+Also, there are lots of MySQL tutorials online - it might be worth working through some of them to get more confident in how __JOINS__ and relationships work.
+
+        </textarea>
+
+        <script src="remark-latest.min.js"></script>
+        <script>
+            var slideshow = remark.create();
+        </script>
+    </body>
+</html>
