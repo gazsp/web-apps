@@ -1,5 +1,6 @@
 <?php
 
+include 'includes/autoload.php';
 include 'includes/utils.php';
 include 'includes/db.php';
 

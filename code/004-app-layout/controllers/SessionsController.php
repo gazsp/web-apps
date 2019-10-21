@@ -12,7 +12,7 @@ class SessionsController
         // Show the login form
         $content = template('users/login_form');
 
-        return template('_layouts/main', [
+        return template('layouts/main', [
             'title' => 'Log In',
             'content' => $content
         ]);

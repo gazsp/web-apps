@@ -1,12 +1,7 @@
 <?php
 
-class UserModel
+class UserModel extends Model
 {
-    function __construct($db)
-    {
-        $this->db = $db;
-    }
-
     /*
      * Login in a user
      */
@@ -26,7 +21,7 @@ class UserModel
     function find_user($username, $password)
     {
         $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-        $result = db()->query($query);
+        $result = $this->db->query($query);
 
         // Return the first row or NULL
         $user = $result->fetch();
