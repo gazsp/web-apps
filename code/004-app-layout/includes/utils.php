@@ -74,7 +74,7 @@ function request_method()
 
     if ($method == 'POST') {
         if (isset($_POST['_method'])) {
-            $method = $_POST['_method'];
+            $method = strtoupper($_POST['_method']);
         }
     }
 
@@ -89,6 +89,9 @@ function current_user()
     return $_SESSION['user'] ?? null;
 }
 
+/*
+ * Redirect to a given path
+ */
 function redirect($path)
 {
     return header('Location:' . url($path));
@@ -104,7 +107,7 @@ function page_not_found()
 }
 
 /*
- * Dump and Die. Output variable, then exit.
+ * Dump and Die. Output some variable(s), then exit.
  */
 function dd(...$variable)
 {
