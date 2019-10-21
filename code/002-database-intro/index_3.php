@@ -30,12 +30,7 @@ function find_user($username, $password)
     $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
     $result = db()->query($query);
 
-    $user = false;
-    if ($result->rowCount()) {
-        $user = $result->fetch();
-    }
-
-    return $user;
+    return $result->fetch();
 }
 
 $user = find_user('user@example.com', 'password');
