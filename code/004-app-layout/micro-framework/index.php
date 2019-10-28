@@ -22,7 +22,17 @@ $methods = [
     'DELETE' => 'delete'
 ];
 
-// Work out which method to call on the controller and then call it,
-// returning the result to the browser
-$method = $methods[request_method()] ?? 'index';
+// Work out which method to call on the controller...
+$method = $methods[request_method()] ?? null
+
+// Check the HTTP method is valid, and that the controller method exists
+if (!$method or !method_exists($controller, $method)) {
+    page_not_found();
+    exit;
+}
+
+// Start the session so we can store logged in / out state etc.
+session_start();
+
+// ... and then call it, returning the result to the browser
 echo $controller->$method();

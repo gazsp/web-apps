@@ -28,4 +28,6 @@ class UserModel extends Model
 
         return $user;
     }
+
+    // ... add other methods as needed ...
 }

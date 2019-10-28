@@ -5,8 +5,9 @@
  */
 function db()
 {
-    // Return the PDO object if it's already been initialised
     static $pdo;
+
+    // Return the PDO object if it's already been initialised
     if ($pdo) {
         return $pdo;
     }
