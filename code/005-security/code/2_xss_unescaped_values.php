@@ -25,14 +25,6 @@ function db()
     return $pdo;
 }
 
-function find_user($username, $password)
-{
-    $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-    $result = db()->query($query);
-
-    return $result->fetch();
-}
-
 function get_posts($user_id)
 {
     $query = "SELECT * FROM posts WHERE user_id='$user_id'";
@@ -59,9 +51,9 @@ $posts = get_posts(1);
     <?php if ($posts->rowCount()): ?>
         <?php while($post = $posts->fetchObject()): ?>
             <div>
-                <h2><?= htmlspecialchars($post->title) ?></h2>
+                <h2><?= $post->title ?></h2>
                 <p>
-                    <?= htmlspecialchars($post->body) ?>
+                    <?= $post->body ?>
                 </p>
             </div>
         <?php endwhile ?>

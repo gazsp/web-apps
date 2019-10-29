@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web Apps</title>
+        <meta charset="utf-8">
+
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+            @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+            @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+            body {
+                font-family: 'Droid Serif';
+                line-height: 2em;
+            }
+
+            h1, h2, h3 {
+                font-family: 'Yanone Kaffeesatz';
+                font-weight: normal;
+                line-height: 1em;
+            }
+
+            h2 {
+                margin: 0.5em 0;
+            }
+
+            .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+            h1::after {
+                content: '';
+                border: 0px solid #000;
+                border-top-width: 4px;
+                width: 10%;
+                height: 0px;
+                margin-top: 15px;
+                display: block;
+            }
+
+            blockquote {
+                padding: 5px 0;
+                line-height: 1.7em;
+                color: #777;
+                font-style: italic;
+            }
+
+            blockquote em {
+                border-bottom: 2px solid #000;
+                color: #000;
+            }
+
+            .title-page h1::after {
+                border: 0;
+            }
+
+            a {
+                color: #0093FF;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <textarea id="source">
+class: center, middle, title-page
+
+# Web Apps - Security
+
+### Web Apps - CCO6005-20
+
+https://github.com/gazsp/web-apps
+
+---
+
+# Security
+
+1. SSL Certificates
+2. Hashing passwords
+3. MySQL Injection
+4. XSS Attacks
+
+---
+
+# SSL Certificates
+
+Provides end-to-end encryption for data sent to / from a server
+
+## How does it work?
+
+* Public / private key encryption
+* A browser attempts to connect to a website (i.e. a web server) secured with SSL
+* The browser requests that the web server identify itself
+* The web server sends the browser a copy of its SSL certificate + public key
+* The browser checks the certificate is valid
+* The web server sends back a digitally signed acknowledgement to start an SSL encrypted session
+* Data is encrypted to / from the server from here on in
+
+---
+
+# Hashing passwords
+
+>  A hash is a unique value created from some data
+
+* Storing passwords unhashed is bad!
+* Gaining access to the database will give an attacker *all* of the user passwords in the system
+* These passwords have probably been used on other websites
+* We can use the PHP hash function to create a hash value from a password
+* There are lots of hashing algorithms available (md5, sha1, sha256)
+* MD5 and SHA1 should not be used for hashing passwords
+* There are other methods / libraries available to hash / encrypt
+
+---
+
+# Hashing passwords (Continued)
+
+```php
+define('HASH_SALT', 'Alonglistofrandomcharacters');
+
+function hash_password($password)
+{
+    $result = hash('sha256', $password . HASH_SALT)
+    return $result;
+}
+
+```
+
+```php
+$password = hash_password('password');
+echo $password;
+
+> "3dd4decebbf438ad2169bddaaf78e6aefe291d58"
+```
+
+---
+
+# Hashing passwords (continued)
+
+```php
+function find_user($username, $password)
+{
+    $query = "SELECT * FROM users WHERE username='$username' " .
+             "AND password='$password'";
+
+    $result = db()->query($query);
+
+    return $result->fetch();
+}
+```
+
+---
+
+# Hashing passwords (continued)
+
+```php
+function find_user($username, $password)
+{
+    $password = hash_password($password);
+
+    $query = "SELECT * FROM users WHERE username='$username' " .
+             "AND password='$password'";
+
+    $result = db()->query($query);
+
+    return $result->fetch();
+}
+```
+
+---
+
+# MySQL Injection
+
+* We should not trust user input!
+* Putting user input directly in to database queries is bad
+* We should use prepared queries instead to escape user data
+
+---
+
+# MySQL Injection (continued)
+
+```php
+function find_user($username, $password)
+{
+    $query = "SELECT * FROM users WHERE username='$username' " .
+             "AND password='$password'";
+
+    $result = db()->query($query);
+
+    return $result->fetch();
+}
+```
+
+---
+
+# MySQL Injection (continued)
+
+```php
+function find_user($username, $password)
+{
+    $sql = "SELECT * FROM users WHERE username=:username AND password=:password";
+    $query = db()->prepare($sql);
+
+    $query->execute([
+        'username' => $username,
+        'password' => $password
+    ]);
+
+    return $query->fetch();
+}
+```
+
+---
+
+# XSS Attacks
+
+> XSS stands for 'Cross-site scripting'
+
+* Allows executing code from external sources in our website
+* Web app uses input from a user in the output it generates without validating or encoding it
+
+---
+
+# Further reading
+
+https://www.php.net/manual/en/pdo.prepare.php
+https://www.php.net/manual/en/function.htmlspecialchars.php
+
+        </textarea>
+
+        <script src="remark-latest.min.js"></script>
+        <script>
+            var slideshow = remark.create();
+        </script>
+    </body>
+</html>

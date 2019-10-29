@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web Apps</title>
+        <meta charset="utf-8">
+
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+            @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+            @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+            body {
+                font-family: 'Droid Serif';
+                line-height: 2em;
+            }
+
+            h1, h2, h3 {
+                font-family: 'Yanone Kaffeesatz';
+                font-weight: normal;
+                line-height: 1em;
+            }
+
+            h2 {
+                margin: 0.5em 0;
+            }
+
+            .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+            h1::after {
+                content: '';
+                border: 0px solid #000;
+                border-top-width: 4px;
+                width: 10%;
+                height: 0px;
+                margin-top: 15px;
+                display: block;
+            }
+
+            blockquote {
+                padding: 5px 0;
+                line-height: 1.7em;
+                color: #777;
+                font-style: italic;
+            }
+
+            blockquote em {
+                border-bottom: 2px solid #000;
+                color: #000;
+            }
+
+            .title-page h1::after {
+                border: 0;
+            }
+
+            a {
+                color: #0093FF;
+            }
+
+            .checklist {
+                list-style: none;
+                padding-left: 0;
+            }
+
+            .checklist li {
+                display: inline-block;
+            }
+
+            .checklist li:before {
+                content: "\2713";
+                padding-right: 10px;
+                color: #ccc;
+            }
+
+            .checklist li.green:before {
+                color: #6eae27;
+            }
+
+            .highlight {
+                background: #FFF9C2;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <textarea id="source">
+class: center, middle, title-page
+
+# Web Apps - Update
+
+### Web Apps - CCO6005-20
+
+https://github.com/gazsp/web-apps
+
+---
+
+# Update
+
+## Where we should be
+
+<ul class="checklist">
+    <li class="green">We should be able to log in and log out</li>
+    <li class="green">Login should query the 'users' table in the database</li>
+    <li class="green">A user should have a 'profile' in the database</li>
+    <li class="green">We should retrieve the user profile from the database when the user logs in</li>
+    <li>We should have a 'posts' table to hold users posts</li>
+</ul>
+
+<small>
+    https://github.com/gazsp/web-apps/tree/master/code/003-databases/
+</small>
+
+        </textarea>
+
+        <script src="remark-latest.min.js"></script>
+        <script>
+            var slideshow = remark.create();
+        </script>
+    </body>
+</html>
