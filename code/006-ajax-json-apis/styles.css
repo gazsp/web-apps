@@ -1,0 +1,23 @@
+a.btn {
+    color: #fff !important;
+    cursor: pointer;
+}
+
+.post {
+    margin: 20px 0;
+}
+
+.actions {
+    padding-top: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.right {
+    text-align: right;
+}
+
+.container {
+    margin-bottom: 20px;
+}

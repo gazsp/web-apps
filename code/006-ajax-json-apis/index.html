@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX / API demo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>API demo</h1>
+
+        <div class="posts"></div>
+
+        <div class="right">
+            <a onclick="loadData()" class="btn btn-primary">Load More</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="main.js"></script>
+
+    <template id="post">
+        <div class="post">
+            <h2 class="title"></h2>
+            <div class="content"></div>
+            <div class="actions">
+                <a class="like-unlike btn btn-secondary" data-id="0" data-liked="false">Like</a>
+            </div>
+        </div>
+    </template>
+</body>
+
+</html>
