@@ -1,0 +1,74 @@
+body {
+    font-family: 'Droid Serif';
+    line-height: 1.75em;
+}
+
+h1, h2, h3 {
+    font-family: 'Yanone Kaffeesatz';
+    font-weight: normal;
+    line-height: 1em;
+}
+
+h2 {
+    margin: 0.5em 0;
+}
+
+.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+h1::after {
+    content: '';
+    border: 0px solid #000;
+    border-top-width: 4px;
+    width: 10%;
+    height: 0px;
+    margin-top: 15px;
+    display: block;
+}
+
+blockquote {
+    padding: 5px 0;
+    line-height: 1.7em;
+    color: #777;
+    font-style: italic;
+}
+
+blockquote em {
+    border-bottom: 2px solid #000;
+    color: #000;
+}
+
+.title-page h1::after {
+    border: 0;
+}
+
+a {
+    color: #0093FF;
+}
+
+.checklist {
+    list-style: none;
+    padding-left: 0;
+}
+
+.checklist li:before {
+    content: "\2713";
+    padding-right: 10px;
+    color: #ccc;
+}
+
+.checklist li.green:before {
+    color: #6eae27;
+}
+
+li strong {
+    background: #FFF9C2;
+}
+
+.highlight {
+    background: #FFF9C2;
+}
+
+svg {
+    display: block;
+    margin: 0 auto;
+}
