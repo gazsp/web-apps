@@ -1,8 +1,6 @@
 class: center, middle, title-page
 
-# Web Apps - Next Steps
-
-**AJAX, JSON and APIs**
+# Web Apps - AJAX, JSON and APIs
 
 #### Web Apps - CCO6005-20
 
@@ -12,7 +10,7 @@ https://github.com/gazsp/web-apps
 
 # AJAX
 
-* AJAX (asynchronous javascript and XML) allows web pages to make requests without reloading the page
+* AJAX (Asynchronous JavaScript And XML) allows web pages to make requests without reloading the page
 * The request runs in the background (asynchronous), and the result is returned to browser when the request finished
 * Modern web apps / front-end frameworks make extensive use of AJAX
 
@@ -77,7 +75,7 @@ https://github.com/gazsp/web-apps
 
 * An API (Application Programmer Interface) defines a set of URLs (or end-points) that can be used to store / retrieve data
 * They generally return JSON or XML (instead of HTML)
-* An API will have clearly defined Requests and Responses (what is sent vs. what is returned)
+* An API will have a clearly defined Request and Response (what is sent vs. what is returned)
 * APIs use standard HTTP request methods / status codes (GET, 200 OK, etc)
 
 ---
