@@ -11,7 +11,7 @@
 
             body {
                 font-family: 'Droid Serif';
-                line-height: 2em;
+                line-height: 1.75em;
             }
 
             h1, h2, h3 {
@@ -49,8 +49,29 @@
                 border: 0;
             }
 
+            img {
+                max-width: 100%;
+            }
+
             a {
                 color: #0093FF;
+            }
+
+            @media print {
+                .remark-slide-container {
+                    height: 100% !important;
+                    width: 100% !important;
+                }
+
+                .remark-slide-scaler {
+                    height: 100% !important;
+                    width: 100% !important;
+                    background: red;
+                    margin: 0 auto !important;
+                    transform: scale(1) !important;
+                    left: auto !important;
+                    right: auto !important;
+                }
             }
         </style>
 
@@ -60,7 +81,9 @@
         <textarea id="source">
 class: center, middle, title-page
 
-# Web Apps - Introduction
+# Web Apps - CC006005-20
+
+## Introduction
 
 ### Gary Renes
 
@@ -68,15 +91,18 @@ class: center, middle, title-page
 
 # What we'll cover
 
+Topics we'll cover over the course of the module:
+
 1. What's a web app? How do they work?
-2. Source control (using Git and Github)
-3. Users, Sessions, Cookies, Requests, Responses etc.
-4. Databases
-5. Security
-6. Wireframes, Specifications
-7. APIs
-8. File uploads
-9. App deployment
+2. Introduction to PHP
+3. Source control (using Git and Github)
+4. Users, Sessions, Cookies, Requests, Responses
+5. Databases
+6. Security
+7. Wireframes, Specifications
+8. APIs, AJAX and JSON
+9. File uploads
+10. App deployment
 
 ---
 
@@ -84,13 +110,24 @@ class: center, middle, title-page
 
 From Wikipeida:
 
-> In computing, a web application or web app is a client–server computer program which the client (including the user interface and client-side logic) runs in a web browser. Common web applications include webmail, online retail sales, and online auction.
+> In computing, a web application or web app is a _client–server_ computer program which the client (including the user interface and client-side logic) runs in a _web browser_. Common web applications include webmail, online retail sales, and online auction.
+
+This isn't a great definition (as we'll see later). Basically all websites are client-server computer programs which run in a web browser.
 
 ---
 
 # What's the difference between a web app and a website?
 
-?
+Have a think about this for a few minutes, then try to find:
+
+1. One example of a website
+2. One example of a web app
+
+Visit this URL:
+
+https://bit.ly/3icZmuZ
+
+Add a note with your chosen URLs, and another note with what you think the difference is between a website and a web app.
 
 ---
 
@@ -106,7 +143,7 @@ From Wikipeida:
 
 We'll use the following definition from here on in:
 
-> A web app is an application built using _web technologies_ that runs in a web browser. It allows _users_ access to application-specific _functionality_ which allows them to perform operations on information stored in a _database_.
+> A web app is an application built using _web technologies_ that runs in a web browser. It gives _users_ access to application-specific _functionality_ which allows them to perform operations on information stored in a _database_.
 
 __Example web apps__:
 
@@ -118,21 +155,63 @@ BBC News, Google.com
 
 ---
 
-# Web technologies
+# How do web apps work?
 
-### Client Side
+<img src="images/request.png">
 
-* HTML & Javascript
-
-### Server Side
-
-* PHP & MySQL
-
-> There are *lots* of server-side (back-end) languages and databases that we could use, but we'll stick to PHP and MySQL for the duration of the module. There are *some* options on the client-side (front-end), but they will always be transpiled in to HTML and Javascript so they can run in the browser.
+* The front-end of the application is downloaded and runs in the users browser (HTML, JS, CSS)
+* A user interacts with the front-end of the applicaiton to manipulate data
+* This data is submitted via a _request_ (POST) or via an API (using Javascript / AJAX request) to the back-end (server-side) part of the app (PHP, MySQL)
+* The data is then persisted, and the app UI is updated to display the new data (_response_)
 
 ---
 
+# Web technologies
+
+**What we'll cover**
+
+### Client Side (Front-end)
+
+* HTML, Javascript, CSS
+
+### Server Side (Back-end)
+
+* PHP & MySQL
+
+---
+
+# Web technologies
+
+There are *lots* of server-side (back-end) languages and databases that we could use, but we'll stick to PHP and MySQL for the duration of the module. There are *some* options on the client-side (front-end), but they will always be transpiled in to HTML and Javascript so they can run in the browser.
+
+> You are free to use *any* language you wish to implement your web app, if you feel confident in doing so
+
+---
+
+# Web technologies
+
+**Some alternatives**
+
+### Client Side (Front-end)
+
+* Front-end frameworks (VueJS, React)
+
+### Server Side (Back-end)
+
+#### Languages
+
+* Ruby, Python, Javascript (NodeJS)
+
+#### Databases
+
+* PostgreSQL, MongoDB
+
+---
+
+
 # Web app users
+
+Users == People
 
 * User accounts are required to log in and access (some / all) of the web app functionality
 * User accounts allow multiple users to use the same app (i.e. access and run the same code)
@@ -141,6 +220,8 @@ BBC News, Google.com
 ---
 
 # Web app functionality
+
+Functionality == Features
 
 Some examples:
 
@@ -153,19 +234,9 @@ Some examples:
 
 # Web app databases
 
-* Store content created by users
-* Are 'relational' - i.e an item of data can be related to another (e.g. a 'Post' can be related to the 'User' who created it)
-* Allow us to perform queries against the data (e.g. 'Return all the posts by user x created in the last 7 days')
-
----
-
-# How do web apps work?
-
-* The front-end (client-side) part is downloaded and runs in the users browser
-* A user registers or logs in to the app
-* The app UI allows the user to manipulate data in the browser
-* The data is submitted via forms (POST requests) or via an API (using Javascript / AJAX request) to the back-end (server-side) part of the app
-* The data is then persisted, and the app UI is updated to display the new data
+* Stores content created by users
+* Are generally 'relational' - i.e an item of data can be related to another (e.g. a 'Post' can be related to the 'User' who created it)
+* Allow us to perform queries against the data (e.g. 'Return all the Posts by User id 1 that were created in the last 7 days')
 
 ---
 
@@ -175,18 +246,19 @@ Some examples:
 
 # Tools / Setup
 
+* https://repl.it/
+* https://codecollab.io/
 * GitHub - https://github.com
 * Git - https://git-scm.com
+
 * MAMP (macOS) - https://www.mamp.info/en/
 * WAMP (Windows) - http://www.wampserver.com/en/
-
-## Slides
-
-* Slides - https://github.com/gazsp/web-apps
 
 ---
 
 # Additional Resources
+
+* https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works
 
 * PHP Sessions - https://www.php.net/manual/en/session.examples.basic.php
 * session_start - https://www.php.net/manual/en/function.session-start.php
