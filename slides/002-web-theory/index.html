@@ -11,17 +11,13 @@
 
             body {
                 font-family: 'Droid Serif';
-                line-height: 2em;
+                line-height: 1.75em;
             }
 
             h1, h2, h3 {
                 font-family: 'Yanone Kaffeesatz';
                 font-weight: normal;
                 line-height: 1em;
-            }
-
-            h2 {
-                margin: 0.5em 0;
             }
 
             .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
@@ -37,6 +33,7 @@
             }
 
             blockquote {
+                /*background: #eee;*/
                 padding: 5px 0;
                 line-height: 1.7em;
                 color: #777;
@@ -52,10 +49,32 @@
                 border: 0;
             }
 
+            img {
+                max-width: 100%;
+            }
+
             a {
                 color: #0093FF;
             }
+
+            @media print {
+                .remark-slide-container {
+                    height: 100% !important;
+                    width: 100% !important;
+                }
+
+                .remark-slide-scaler {
+                    height: 100% !important;
+                    width: 100% !important;
+                    background: red;
+                    margin: 0 auto !important;
+                    transform: scale(1) !important;
+                    left: auto !important;
+                    right: auto !important;
+                }
+            }
         </style>
+
 
     </head>
 
@@ -184,16 +203,18 @@ See https://www.restapitutorial.com/httpstatuscodes.html or https://http.cat/
 
 __Cookies__
 
-* Cookies are simply pieces of information stored in the web browser. They can be set by on the client side (by Javascript) or on the server side (via PHP or another server-side language)
+* Cookies are simply pieces of information stored in the web browser
+* They are sent from the server to the browser
 * Passed to / from the server via the 'Cookie' header
 * Can only store a small amount of information (around 4Kb)
 
 __Sessions__
 
-* Sessions are completely server-side constructs
-* The use a session id stored in a cookie to link to session information stored on the server
-* Used to keep track of application state for a session (e.g. is the user logged in)
-* Can be 'native' (built-in / file) sessions or backed by a database / other store
+* Sessions are completely server-side constructs (they only exist on the server)
+* Use a session id stored in a cookie to link to a user to the data on the server
+* Keep track of application state for a session (e.g. 'is the user logged in?')
+* Can be 'native' (built-in / file) or backed by a database / other store
+* We'll use the built-in PHP sessions ($_SESSION super-global)
 
 ---
 
@@ -230,10 +251,10 @@ xhr.send(JSON.stringify({
 
 # Additional Resources
 
+* https://www.php.net/manual/en/book.session.php
+* https://en.wikipedia.org/wiki/HTTP_cookie
 * HTTP/1.0 - https://tools.ietf.org/html/rfc1945
 * HTTP Status Cats - https://http.cat/
-
----
 
         </textarea>
 
