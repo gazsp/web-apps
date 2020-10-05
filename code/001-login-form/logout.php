@@ -2,8 +2,7 @@
 
 session_start();
 
-// Clear session
-session_destroy();
+// Clear session - no need to call session_destroy()
 $_SESSION = [];
 
 include 'index.php';
