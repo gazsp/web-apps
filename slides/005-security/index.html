@@ -55,8 +55,26 @@
             a {
                 color: #0093FF;
             }
-        </style>
 
+            .checklist {
+                list-style: none;
+                padding-left: 0;
+            }
+
+            .checklist li:before {
+                content: "\2713";
+                padding-right: 10px;
+                color: #ccc;
+            }
+
+            .checklist li.green:before {
+                color: #6eae27;
+            }
+
+            .highlight {
+                background: #FFF9C2;
+            }
+        </style>
     </head>
 
     <body>
@@ -71,6 +89,19 @@ https://github.com/gazsp/web-apps
 
 ---
 
+# Update
+
+## Where we should be
+
+<ul class="checklist">
+    <li class="green">We should be able to log in and log out</li>
+    <li class="green">Login should query the 'users' table in the database</li>
+    <li class="green">A user should have a 'profile' in the database</li>
+    <li class="green">We should retrieve the user profile from the database when the user logs in</li>
+</ul>
+
+---
+
 # Security
 
 1. SSL Certificates
@@ -80,19 +111,31 @@ https://github.com/gazsp/web-apps
 
 ---
 
-# SSL Certificates
+# SSL (Secure Sockets Layer)
 
-Provides end-to-end encryption for data sent to / from a server
+Provides end-to-end encryption for data sent to / from a server (this is what is used when you visit a website using a https:// URL)
+
+## Why use SSL?
+
+SSL serves two main purposes:
+
+* Verifying that you are talking directly to the server that you think you are talking to
+* Ensuring that only the server can read what you send it and only you can read what it sends back
+
+---
+
+# SSL (Secure Sockets Layer)
 
 ## How does it work?
 
-* Public / private key encryption
-* A browser attempts to connect to a website (i.e. a web server) secured with SSL
+* A browser attempts to connect to a website (actually a web server) secured with SSL
 * The browser requests that the web server identify itself
-* The web server sends the browser a copy of its SSL certificate + public key
+* The web server sends the browser a copy of its SSL certificate
 * The browser checks the certificate is valid
 * The web server sends back a digitally signed acknowledgement to start an SSL encrypted session
 * Data is encrypted to / from the server from here on in
+
+See https://robertheaton.com/2014/03/27/how-does-https-actually-work/ for more detail
 
 ---
 
@@ -153,6 +196,7 @@ function find_user($username, $password)
 ```php
 function find_user($username, $password)
 {
+    // Hash the plain-text password
     $password = hash_password($password);
 
     $query = "SELECT * FROM users WHERE username='$username' " .
@@ -170,11 +214,14 @@ function find_user($username, $password)
 
 * We should not trust user input!
 * Putting user input directly in to database queries is bad
-* We should use prepared queries instead to escape user data
+* We should use prepared queries instead to send the query and data seperately
+* This stops MySQL trying to execute values as part of the query
 
 ---
 
 # MySQL Injection (continued)
+
+Current implementation (vunerable to SQL injection)
 
 ```php
 function find_user($username, $password)
@@ -192,12 +239,16 @@ function find_user($username, $password)
 
 # MySQL Injection (continued)
 
+New version using prepared queries
+
 ```php
 function find_user($username, $password)
 {
+    // Prepare a query (the part that will be executed)
     $sql = "SELECT * FROM users WHERE username=:username AND password=:password";
     $query = db()->prepare($sql);
 
+    // Provide the data
     $query->execute([
         'username' => $username,
         'password' => $password
@@ -215,6 +266,20 @@ function find_user($username, $password)
 
 * Allows executing code from external sources in our website
 * Web app uses input from a user in the output it generates without validating or encoding it
+
+---
+
+# What's next
+
+Update your code to use:
+
+* Hashed passwords
+* Prepared queries
+
+Then start work on:
+
+* User Posts (Create Posts, Show Posts)
+* Escaping HTML / preventing XSS attacks
 
 ---
 
