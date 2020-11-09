@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-
 include '../includes/utils.php';
 
 $logged_in = false;
@@ -22,7 +21,7 @@ if (!empty($_POST)) {
 $logged_in = $_SESSION['user'] ?? false;
 
 if ($logged_in) {
-    include 'logged_in.php';
+    redirect('/');
 }
 else {
     include "login_form.php";

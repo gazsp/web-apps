@@ -10,5 +10,6 @@ class IndexController
         }
 
         // TODO: Display the homepage
+        return view('home');
     }
 }

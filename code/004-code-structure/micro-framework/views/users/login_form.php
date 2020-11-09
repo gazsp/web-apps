@@ -1,6 +1,6 @@
 <h3>Log In</h3>
 
-<form action="<?php echo url('sessions') ?>" method="POST">
+<form action="<?= url('sessions') ?>" method="POST">
     <div class="form-group">
         <label for="Username">Username</label>
         <input name="username" class="form-control" type="email" required>

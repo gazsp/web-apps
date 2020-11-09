@@ -33,17 +33,15 @@ function filepath($filename)
 }
 
 /*
- * Load template file
+ * Load view file
  */
-function template($path, $variables = [])
+function view($path, $variables = [])
 {
     ob_start();
 
     extract($variables);
-
-    $template = filepath('templates/' . $path . '.php');
-
-    include($template);
+    $view = filepath('views/' . $path . '.php');
+    include($view);
 
     return ob_get_clean();
 }

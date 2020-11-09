@@ -5,6 +5,8 @@
  */
 function url($folder = null)
 {
+    $folder = trim($folder, '/');
+
     if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
         $link = "https";
     }

@@ -3,7 +3,6 @@
 include '../includes/utils.php';
 
 session_start();
+$_SESSION = [];
 
-session_destroy();
-
-redirect('users');
+redirect('/');

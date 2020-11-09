@@ -3,17 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Logged In</title>
+    <title>Posts</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
 <body>
     <div class="container">
-        <h3>Logged In</h3>
+        <h3>Posts</h3>
 
-        <p>You are logged in as <?= current_user()['username'] ?></p>
+        <p>TODO: Show posts</p>
 
         <p>
+            <a href="/">Home</a>
             <a href="<?= url('users/logout.php') ?>">Log out</a>
         </p>
     </div>

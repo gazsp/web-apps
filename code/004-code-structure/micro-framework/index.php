@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include 'includes/autoload.php';
 include 'includes/utils.php';
 include 'includes/db.php';
@@ -23,16 +27,16 @@ $methods = [
 ];
 
 // Work out which method to call on the controller...
-$method = $methods[request_method()] ?? null
+$method = $methods[request_method()] ?? null;
+
+// Start the session so we can store logged in / out state etc.
+session_start();
 
 // Check the HTTP method is valid, and that the controller method exists
 if (!$method or !method_exists($controller, $method)) {
     page_not_found();
     exit;
 }
-
-// Start the session so we can store logged in / out state etc.
-session_start();
 
 // ... and then call it, returning the result to the browser
 echo $controller->$method();
