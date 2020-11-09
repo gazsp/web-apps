@@ -13,15 +13,13 @@ h2 {
     margin: 0.5em 0;
 }
 
-.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
-
 h1::after {
     content: '';
-    border: 0px solid #000;
+    border: 0px solid #0093FF;
     border-top-width: 4px;
     width: 10%;
     height: 0px;
-    margin-top: 15px;
+    margin-top: 8px;
     display: block;
 }
 
@@ -71,4 +69,54 @@ li strong {
 svg {
     display: block;
     margin: 0 auto;
+}
+
+img {
+    display: block;
+    max-width: 85%;
+    margin: 0 auto;
+}
+
+a {
+    color: #0093FF;
+}
+
+.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+figure figcaption {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: .8em;
+}
+
+@media print {
+    .remark-slide-container {
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+    .remark-slide-scaler {
+        height: 100% !important;
+        width: 100% !important;
+        background: red;
+        margin: 0 auto !important;
+        transform: scale(1) !important;
+        left: auto !important;
+        right: auto !important;
+    }
+}
+
+.cols {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+pre {
+    margin-top: 0;
+    font-size: .8em;
+}
+
+h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
 }
