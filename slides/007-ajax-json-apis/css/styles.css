@@ -72,3 +72,21 @@ svg {
     display: block;
     margin: 0 auto;
 }
+
+@media print {
+    .remark-slide-container {
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+    .remark-slide-scaler {
+        height: 100% !important;
+        width: 100% !important;
+        background: red;
+        margin: 0 auto !important;
+        transform: scale(1) !important;
+        left: auto !important;
+        right: auto !important;
+    }
+}
+
