@@ -33,10 +33,9 @@ https://github.com/gazsp/web-apps
 
     xhr.onreadystatechange = function () {
         var DONE = 4; // readyState 4 means the request is done.
-        var OK = 200; // status 200 is a successful return.
 
         if (xhr.readyState === DONE) {
-            if (xhr.status === OK) {
+            if (xhr.status >= 200 && xhr.status <= 299) {
                 var data = JSON.parse(xhr.responseText);
                 console.log(data);
             } else {
@@ -98,3 +97,17 @@ echo json_encode($data, JSON_PRETTY_PRINT);
     "hello": "world"
 }
 ```
+
+---
+
+# Additional Links
+
+jQuery AJAX API
+
+https://api.jquery.com/Jquery.ajax/
+
+A Guide to Vanilla Ajax without jQuery
+
+https://www.sitepoint.com/guide-vanilla-ajax-without-jquery/
+
+
