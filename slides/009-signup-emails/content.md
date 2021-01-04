@@ -29,7 +29,6 @@ ALTER TABLE users ADD CONSTRAINT uniq_email_address UNIQUE (email_address)
 
 * If a user forgets their password, we'll need to email them a link to reset it
 * Before we can do that, we'll need to generate a unique link for the user to be able to reset their password
-* We can do this using something like this:
 
 ```php
     function set_reset_password_code($user_id) {
@@ -41,7 +40,7 @@ ALTER TABLE users ADD CONSTRAINT uniq_email_address UNIQUE (email_address)
 
 We can then email this code to the user, and retrieve their account with it later. The URL might look something like:
 
-http://my-web-app/resetpassword.php?code=e333f2c54f49a1cb1f33d4ccf7cee986
+    http://my-web-app/resetpassword.php?code=e333f2c54f49a1cb1f33d4ccf7cee986
 
 ---
 
