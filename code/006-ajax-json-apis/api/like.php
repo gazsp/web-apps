@@ -22,10 +22,22 @@ $data = getJsonData();
 
 if (isset($data['like']) && isset($data['id']))
 {
+    // This is where your database query to add / delete a like would gp
+    if($data['like']) {
+        // INSERT ...
+    }
+    {
+        // DELETE ...
+    }
+
+    // If you want to display a like count in the UI, then you need to do a COUNT query here
+
 	// Response data - echo back what was sent for now
     $response = [
         'id' => $data['id'],
-        'liked' => $data['like']
+        'liked' => $data['like'],
+         // This should be the like count for the post - we'll just show 0 or 1 for now
+        'likeCount' => $data['like'] ? 1 : 0
     ];
 
     // 201 - created
